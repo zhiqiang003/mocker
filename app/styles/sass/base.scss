@@ -1,0 +1,8 @@
+@import '../../../node_modules/antd/dist/antd.css';
+@import './common/test.scss';
+
+$pre: red;
+
+h1: {
+    color: $pre;
+}
