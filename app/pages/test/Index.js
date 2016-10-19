@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../../core/Layout';
+import Layout from 'app/core/Layout';
 import { Table, Icon } from 'antd';
 
 const columns = [{
