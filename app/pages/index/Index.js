@@ -5,6 +5,7 @@ import RedBase from 'app/core/Layout/RedBase';
 import reducers from './reducers';
 
 import Test from './containers/Test';
+import Home from './containers/Home';
 
 class Lay extends Layout {
   renderContent() {
@@ -15,7 +16,7 @@ class Lay extends Layout {
 const Index = (props) => (
   <Router history={hashHistory}>
     <Route component={Lay}>
-      <Route path="/" component={Test} />
+      <Route path="/" component={Home} />
       <Route path="/project/:id" component={Test} />
       <Route path="/version/:id" component={Test} />
       <Route path="/docs/:file" component={Test} />

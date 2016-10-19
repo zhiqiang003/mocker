@@ -1,0 +1,50 @@
+.block-list {
+  li {
+    float: left; 
+    background-color: #ECF0F1;
+  }
+}
+.project-list {
+  li {
+    position: relative;
+    height: 110px;
+    width: 25%;
+    margin: 20px 4.16%;
+    padding: 10px;
+    .block-item-plus {
+      font-size: 40px;
+      font-weight: bold;
+      display: block;
+      text-align: center;
+      line-height: 90px;
+    }
+
+    h2, p {
+      color: #34495e;
+      line-height: 2em;
+      overflow: scroll;
+    }
+    .anticon-setting {
+      position: absolute;
+      cursor: pointer;
+      bottom: 14px;
+      right: 14px;
+      font-size: 14px;
+    }
+  }
+}
+
+.edit-pop {
+  text-align: center;
+  font-size: 16px;
+  .anticon {
+    cursor: pointer;
+  }
+  .anticon-edit {
+    color: #F1C40F;
+    margin-right: 30px;
+  }
+  .anticon-delete {
+    color: #E74C3C;
+  }
+}
