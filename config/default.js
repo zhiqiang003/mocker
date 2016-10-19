@@ -30,6 +30,7 @@ export default Object.assign({}, packson, {
       entry: rooter('app/pages'),
       dest: rooter('assets/scripts')
     },
+    markdown: rooter('docs'),
 
     // server
     app: rooter('server/main.js'),
