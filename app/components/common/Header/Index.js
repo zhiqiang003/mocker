@@ -21,9 +21,9 @@ const Header = (props) => {
   return (
     <header className="navbar"> 
       <div className="container">
-        <a className="pull-left navbar-brand" href="/">
+        <Link className="pull-left navbar-brand" to="/">
           <h1>{props.system && props.system.name}</h1>
-        </a>
+        </Link>
         <ul className="pull-right navbar-nav">
           <li><a onClick={openNotification}>反馈</a></li>
           <li>

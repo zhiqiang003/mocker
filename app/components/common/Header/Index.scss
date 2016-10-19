@@ -23,14 +23,15 @@
   padding: 0 5px;
   margin: 0 auto;
 }
-@media (min-width: 992px) {
-  .container {
-    width: 950px;
-  }
-}
+
 @media (min-width: 768px) {
   .container {
     width: 730px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 950px;
   }
 }
 .pull-right {

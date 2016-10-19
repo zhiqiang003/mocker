@@ -7,47 +7,86 @@ import { Icon, Popover } from 'antd';
 
 import './Home.scss';
 import * as listAction from '../actions/list';
-
-const content =(
-  <div className="edit-pop">
-    <Icon type="edit" />
-    <Icon type="delete" />
-  </div>
-);
+import * as modalAction from '../actions/modal';
+import ProjectEditor from 'app/components/common/ProjectEditor';
 
 class Home extends Component {
+
+    handleClickAdd() {
+      this.props.openEditor({modalTitle: 'Add Project'});
+    }
+
+    handleClickEdit(id, index) {
+      this.props.openEditor(Object.assign({}, this.props.project.list[index], {modalTitle: 'Edit Project'}));
+    }
+
+    handleClickDelete(id) {
+      this.props.openEditor({});
+    }
+
+    handleConfirm() {
+      this.props.confirmEditor();
+    }
+
+    handleCancel() {
+      this.props.closeEditor();
+    }
+
+    handleFormUpdate(ev) {
+      this.props.updateEditor({
+        name: ev.target.name,
+        value: ev.target.value
+      });
+    }
+
     componentDidMount() {
       this.props.fetchProjectList();
     }
 
+    renderPopContent(id, index) {
+      return (
+        <div className="edit-pop">
+          <Icon type="edit" onClick={(ev) => {this.handleClickEdit(id, index, ev)}}/>
+          <Icon type="delete" onClick={(ev) => {this.handleClickDelete(id, ev)}} />
+        </div>
+      );
+    }
+
     render() {
-      let { project } = this.props;
+      let { project, modal } = this.props;
 
       return (
         <div className="container">
           <ul className="clearfix block-list project-list">
             <li>
-              <a className="block-item-plus"><Icon type="plus" /></a>
+              <a className="block-item-plus" onClick={(ev) => this.handleClickAdd(ev)}><Icon type="plus" /></a>
             </li>
             {project.list.map((item, index) => {
               return (
                 <li key={item.id}>
-                  <h2>{item.name}</h2>
-                  <p>{item.dest}</p>
+                  <h2><Link to={`/project/${item.id}`}>{item.name}</Link></h2>
+                  <p>{item.desc}</p>
                   <p>{item.api}</p>
-                  <Popover content={content} trigger="hover">
+                  <Popover content={this.renderPopContent(item.id, index)} trigger="hover">
                     <Icon type="setting" />
                   </Popover>
                 </li>
               );
             })}
           </ul>
+          <ProjectEditor
+            info={modal.editInfo}
+            show={modal.show}
+            updateForm={(ev) => {this.handleFormUpdate(ev)}}
+            handleCancel={() => {this.handleCancel()}}
+            handleConfirm={() => {this.handleConfirm()}}
+          />
         </div>
       );
     }
 }
 
 export default connect(
-  (state) => ({project: state.project}),
-  (dispatch) => bindActionCreators({ ...listAction }, dispatch)
+  (state) => ({project: state.project, modal: state.modal}),
+  (dispatch) => bindActionCreators({ ...listAction, ...modalAction }, dispatch)
 )(Home);

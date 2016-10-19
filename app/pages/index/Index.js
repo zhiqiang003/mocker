@@ -6,6 +6,7 @@ import reducers from './reducers';
 
 import Test from './containers/Test';
 import Home from './containers/Home';
+import Project from './containers/Project';
 
 class Lay extends Layout {
   renderContent() {
@@ -17,7 +18,7 @@ const Index = (props) => (
   <Router history={hashHistory}>
     <Route component={Lay}>
       <Route path="/" component={Home} />
-      <Route path="/project/:id" component={Test} />
+      <Route path="/project/:id" component={Project} />
       <Route path="/version/:id" component={Test} />
       <Route path="/docs/:file" component={Test} />
       <Redirect from="*" to="/" />
