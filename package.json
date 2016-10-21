@@ -67,6 +67,8 @@
     "js-md5": "^0.4.1",
     "lodash": "^4.13.1",
     "marked": "^0.3.6",
+    "mysql": "^2.11.1",
+    "node-uuid": "^1.4.7",
     "precss": "^1.4.0",
     "react": "^15.2.1",
     "react-chartjs": "^0.7.3",
@@ -79,6 +81,7 @@
     "redux-thunk": "^2.1.0",
     "request": "^2.74.0",
     "rs-page": "^0.0.3",
+    "sequelize": "^3.24.4",
     "webpack": "^1.13.1",
     "webpack-livereload-plugin": "^0.8.1"
   }

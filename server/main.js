@@ -5,4 +5,5 @@ export default Salt()
     .load('static')
     .load('forward-backend')
     .load('router')
+    .load('sql')
     .load('logger');

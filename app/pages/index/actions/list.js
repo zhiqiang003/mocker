@@ -1,12 +1,19 @@
 import projects from './data/project';
 import versions from './data/version';
+import request from 'app/vendor/request';
 
 export function fetchProjectList() {
   return dispatch => {
-    dispatch({
-      type: 'GET_PROJECT_LIST',
-      data: projects
-    })
+    request.get('/end/project/list')
+      .promiseify()
+      .then((res) => {
+        dispatch({
+          type: 'GET_PROJECT_LIST',
+          data: JSON.parse(res.text).data
+        });
+      }, (err) => {
+        console.log(err);
+      })
   }
 }
 

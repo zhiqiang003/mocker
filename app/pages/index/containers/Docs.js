@@ -7,7 +7,7 @@ export default class Docs extends Component {
   }
 
   fetchFile(fileName) {
-    request.get(`/markdown/${fileName}`)
+    request.get(`/end/markdown/${fileName}`)
       .promiseify()
       .then((res) => {
         this.setState({

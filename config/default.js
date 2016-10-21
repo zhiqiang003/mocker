@@ -8,7 +8,14 @@ const port = 8787;
 export default Object.assign({}, packson, {
   port,
   backend: {
-    v1: 'http://139.198.2.252:9000/v1'
+    v1: ''
+  },
+  dbConfig: {
+    dialect: 'mysql',
+    host: 'localhost',
+    db_name: 'mocker',
+    username: 'root',
+    password: '123456'
   },
   path: {
     root: rootPath,
