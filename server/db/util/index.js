@@ -15,3 +15,15 @@ export const isUnique = (model, key, instance) => {
     });
   }
 }
+
+export const addColumn = (tableName, columnName, dataType) => {
+  return sequelize.getQueryInterface().addColumn(tableName, columnName, dataType);
+}
+
+export const delColumn = (tableName, columnName, dataType) => {
+  return sequelize.getQueryInterface().removeColumn(tableName, columnName, dataType);
+}
+
+export const moveColumn = (tableName, columnName, dataType) => {
+  return sequelize.getQueryInterface().changeColumn(tableName, columnName, dataType);
+}

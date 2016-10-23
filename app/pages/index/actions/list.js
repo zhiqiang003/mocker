@@ -1,5 +1,6 @@
 import versions from './data/version';
 import request from 'app/vendor/request';
+import { message } from 'antd';
 
 export function fetchProjectList() {
   return dispatch => {
@@ -40,5 +41,22 @@ export function fetchProjectInfo(id) {
         }
       }
     });
+  }
+}
+
+export function deleteItem(modelType, info) {
+  return dispatch => {
+    request.del(`/end/${modelType}/${info.id}`)
+      .promiseify()
+      .then((res) => {
+        console.log(res);
+        if (res.body.errors) {
+          message.warning(res.body.message);
+          return;
+        }
+        fetchProjectList()(dispatch);
+      }, (err) => {
+        console.log(err);
+      });
   }
 }

@@ -7,7 +7,9 @@ import queryString from 'query-string';
 
 export default class Main extends Controller {
     *list(name) {
-      let list = yield Project.findAll({});
+      let list = yield Project.findAll({where: {
+        is_deleted: false
+      }});
       this.podata({
         data: list
       });
@@ -32,13 +34,23 @@ export default class Main extends Controller {
 
     *update() {
       let query = queryString.parse(this.ctx.request.url.split('?')[1]);
-      let project = yield Project.findOne({ where: {
-        id: query.id
-      }});
+      query.id = query.id - 0;  //  请注意数据格式
 
       try {
         let action = yield Project.update(query, { where: {
           id: query.id
+        }});
+        this.podata({data: action});
+      } catch(ex) {
+        console.log(ex);
+        this.podata({data: ex});
+      }
+    }
+
+    *delete(id) {
+      try {
+        let action = yield Project.update({is_deleted: true}, { where: {
+          id
         }});
         this.podata({data: action});
       } catch(ex) {

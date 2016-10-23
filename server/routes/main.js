@@ -10,6 +10,7 @@ get "/end/project/list" => "project#list"
 get "/end/project/:id(\d+)" => "project#get"
 post "/end/project" => "project#create"
 put "/end/project" => "project#update"
+delete "/end/project/:id(\d+)" => "project#delete"
 
 // special
 get "/end/markdown/:md(\w+)" => "markdown#common"

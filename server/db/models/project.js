@@ -33,6 +33,10 @@ const Project = sequelize().define('project', {
   },
   create_by: {
     type: Sequelize.STRING
+  },
+  is_deleted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 }, {
   freezeTableName: true

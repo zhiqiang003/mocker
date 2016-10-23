@@ -41,7 +41,7 @@ export function confirmEditor(modelType, info) {
     method = 'put';
   };
   return dispatch => {
-      request[method]('/end/project')
+      request[method](`/end/${modelType}`)
       .query(info)
       .promiseify()
       .then((res) => {

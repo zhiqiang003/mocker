@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Icon, Popover, message } from 'antd';
-
-
+import { Icon, Popover, message, Modal } from 'antd';
 import './Home.scss';
 import * as listAction from '../actions/list';
 import * as modalAction from '../actions/modal';
 import ProjectEditor from 'app/components/common/ProjectEditor';
+const confirm = Modal.confirm;
 
 class Home extends Component {
 
@@ -21,7 +20,14 @@ class Home extends Component {
     }
 
     handleClickDelete(id) {
-      this.props.openEditor({});
+      let self = this;
+      confirm({
+        title: '删除此项目？',
+        onOk() {
+          self.props.deleteItem('project', {id: id});
+        },
+        onCancel() {}
+      });
     }
 
     handleConfirm() {
