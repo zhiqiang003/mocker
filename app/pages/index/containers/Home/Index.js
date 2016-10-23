@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { Icon, Popover, message, Modal } from 'antd';
-import './Home.scss';
-import * as listAction from '../actions/list';
-import * as modalAction from '../actions/modal';
+import './Index.scss';
+import * as listAction from 'main/actions/list';
+import * as modalAction from 'main/actions/modal';
 import ProjectEditor from 'app/components/common/ProjectEditor';
 const confirm = Modal.confirm;
 

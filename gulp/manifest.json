@@ -199,7 +199,7 @@
     "../../node_modules/history/lib/runTransitionHook.js": 196,
     "../../node_modules/history/lib/deprecate.js": 197,
     "../../node_modules/history/lib/useQueries.js": 198,
-    "../../node_modules/query-string/index.js": 199,
+    "../../node_modules/history/node_modules/query-string/index.js": 199,
     "../../node_modules/strict-uri-encode/index.js": 200,
     "../../node_modules/react-router/lib/createTransitionManager.js": 201,
     "../../node_modules/react-router/lib/computeChangedRoutes.js": 202,

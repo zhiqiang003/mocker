@@ -55,7 +55,8 @@ export default {
   },
   resolve: {
     alias: {
-      app: rooter('app')
+      app: rooter('app'),
+      main: rooter('app/pages/index')
     },
     extensions: ['', '.jsx', '.js', '.scss', '.html'],
     modulesDirectories: ['node_modules']

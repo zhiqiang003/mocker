@@ -26,21 +26,22 @@ export function fetchVersionList(projectId) {
   }
 }
 
-export function fetchProjectInfo(id) {
+export function fetchProjectInfo(modelType, info) {
   // 此处也要异步
   return dispatch => {
-    dispatch({
-      type: 'GET_ACTIVE',
-      data: {
-        name: 'project',
-        value: {
-          id: id,
-          name: '测试',
-          desc: '测试',
-          api: 'google.com'
-        }
-      }
-    });
+    request.get(`/end/${modelType}/${info.id}`)
+      .promiseify()
+      .then((res) => {
+        dispatch({
+          type: 'GET_ACTIVE',
+          data: {
+            name: 'project',
+            value: JSON.parse(res.text).data
+          }
+        });
+      }, (err) => {
+        console.log(err);
+      });
   }
 }
 

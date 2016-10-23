@@ -4,10 +4,10 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { Icon, Popover } from 'antd';
 
-import * as listAction from '../actions/list';
-import * as modalAction from '../actions/modal';
+import * as listAction from 'main/actions/list';
+import * as modalAction from 'main/actions/modal';
 import VersionEditor from 'app/components/common/VersionEditor';
-import './Project.scss';
+import './Index.scss';
 
 class Home extends Component {
 
@@ -39,7 +39,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-      this.props.fetchProjectInfo({projectId: this.props.params.id});
+      this.props.fetchProjectInfo('project', {id: this.props.params.id});
       this.props.fetchVersionList();
     }
 

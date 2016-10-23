@@ -16,7 +16,10 @@ export default class Main extends Controller {
     }
 
     *get(id) {
-      this.podata({data: 1});
+      let project = yield Project.findOne({where: {
+        id
+      }})
+      this.podata({data: project});
     }
 
     *create() {
