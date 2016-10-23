@@ -1,4 +1,3 @@
-import projects from './data/project';
 import versions from './data/version';
 import request from 'app/vendor/request';
 

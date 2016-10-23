@@ -14,7 +14,7 @@ const Project = sequelize().define('project', {
     validate: {
       notEmpty: true,
       isUnique: function(value, next) {
-        return util.isUnique("project", "name")(value, next);
+        return util.isUnique("project", "name", this)(value, next);
       }
     }
   },

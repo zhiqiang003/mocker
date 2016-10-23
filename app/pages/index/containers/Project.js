@@ -24,7 +24,7 @@ class Home extends Component {
     }
 
     handleConfirm() {
-      this.props.confirmEditor();
+      this.props.confirmEditor('version', 'xx', this.props.activeInfo);
     }
 
     handleCancel() {

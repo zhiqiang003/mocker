@@ -1,8 +1,8 @@
 import sequelize from '../index';
 
-export const isUnique(model, key, instance) {
+export const isUnique = (model, key, instance) => {
   return (value, next) => {
-    let Model = rquire('../models/' + model);
+    let Model = require('../models/' + model);
     let query = {};
 
     query[key] = value;
@@ -10,7 +10,7 @@ export const isUnique(model, key, instance) {
       if (obj && obj.id !== instance.id) {
         next(key + ': ' + value + ' is in use');
       } else {
-        nest();
+        next();
       }
     });
   }

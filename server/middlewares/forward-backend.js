@@ -62,9 +62,7 @@ function forward(url, options) {
             code: err.status
         }));
     }).pipe(this.res);
-
 }
-
 
 export default function(app, config) {
     console.log('---------- Extensions: backend ----------');

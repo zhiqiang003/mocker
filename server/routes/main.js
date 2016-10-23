@@ -8,7 +8,7 @@ get "/error" => "error#base"
 // action
 get "/end/project/list" => "project#list"
 get "/end/project/:id(\d+)" => "project#get"
-post "/end/project" => "project#add"
+post "/end/project" => "project#create"
 put "/end/project" => "project#update"
 
 // special

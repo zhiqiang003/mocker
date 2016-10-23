@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Icon, Popover } from 'antd';
+import { Icon, Popover, message } from 'antd';
 
 
 import './Home.scss';
@@ -25,7 +25,11 @@ class Home extends Component {
     }
 
     handleConfirm() {
-      this.props.confirmEditor();
+      if (!this.props.modal.editInfo.name) {
+        message.warning('Name is nessary.');
+        return;
+      }
+      this.props.confirmEditor('project', this.props.modal.editInfo);
     }
 
     handleCancel() {

@@ -33,6 +33,7 @@ export default {
       query: {
         presets: ['react', 'es2015', 'stage-0'],
         plugins: [
+          'antd',
           'add-module-exports',
           'transform-decorators-legacy',
           ['transform-runtime', {
