@@ -1,15 +1,11 @@
-.project-side {
+.version-side {
   float: left;
-  width: 100px;
+  width: 160px;
   margin-top: 20px;
-  p {
-    margin-top: 2px;
-    margin-bottom: 10px;
-  }
 }
 
-.project-main {
-  margin-left: 100px;
+.version-main {
+  margin-left: 160px;
   .ant-breadcrumb {
     line-height: 4em;
     margin: 0 4%;

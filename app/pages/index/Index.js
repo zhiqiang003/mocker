@@ -7,6 +7,7 @@ import reducers from './reducers';
 import Test from './containers/Test';
 import Home from './containers/Home';
 import Project from './containers/Project';
+import Version from './containers/Version';
 import Docs from './containers/Docs';
 
 class Lay extends Layout {
@@ -20,7 +21,7 @@ const Index = (props) => (
     <Route component={Lay}>
       <Route path="/" component={Home} />
       <Route path="/project/:id" component={Project} />
-      <Route path="/version/:id" component={Test} />
+      <Route path="/project/:projectId/version/:id" component={Version} />
       <Route path="/docs/:file" component={Docs} />
       <Redirect from="*" to="/" />
     </Route>

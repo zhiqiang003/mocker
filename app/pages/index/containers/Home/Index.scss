@@ -11,6 +11,9 @@
     width: 25%;
     margin: 20px 4.16%;
     padding: 10px;
+    &:hover {
+      box-shadow: 0px 0px 18px #ccc;
+    }
     .block-item-plus {
       font-size: 40px;
       font-weight: bold;
@@ -24,12 +27,18 @@
       line-height: 2em;
       overflow: scroll;
     }
-    .anticon-setting {
+    .anticon-setting, .anticon-cloud {
       position: absolute;
       cursor: pointer;
+      font-size: 14px;
+    }
+    .anticon-setting {
       bottom: 14px;
       right: 14px;
-      font-size: 14px;
+    }
+    .anticon-cloud {
+      bottom: 14px;
+      left: 14px;
     }
   }
 }

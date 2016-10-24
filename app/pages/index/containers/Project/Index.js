@@ -90,12 +90,17 @@ class Home extends Component {
               {version.list.map((item, index) => {
                 return (
                   <li key={item.id}>
-                    <h2><Link to={`/version/${item.id}`}>{item.name}</Link></h2>
+                    <h2><Link to={`/project/${activeInfo.project.id}/version/${item.id}`}>{item.name}</Link></h2>
                     <p>{item.desc}</p>
                     <p>{item.api}</p>
                     <Popover content={this.renderPopContent(item.id, index)} trigger="hover">
                       <Icon type="setting" />
                     </Popover>
+                    {item.enable_cache && (
+                      <Popover content="已开启缓存" trigger="hover">
+                        <Icon type="cloud" />
+                      </Popover>
+                    )}
                   </li>
                 );
               })}

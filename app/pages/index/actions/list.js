@@ -38,14 +38,24 @@ export function fetchList(modelType, info) {
  *  获取单个条目信息
  */
 export function fetchSingleInfo(modelType, info) {
+  let url = '/end/project/';
+  switch (modelType) {
+    case 'project':
+      url += info.id;
+      break;
+    case 'version':
+      url += `${info.projectId}/version/${info.id}`;
+      break;
+  }
+
   return dispatch => {
-    request.get(`/end/${modelType}/${info.id}`)
+    request.get(url)
       .promiseify()
       .then((res) => {
         dispatch({
           type: 'GET_ACTIVE',
           data: {
-            name: 'project',
+            name: modelType,
             value: JSON.parse(res.text).data
           }
         });
