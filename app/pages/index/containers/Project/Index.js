@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Icon, Popover } from 'antd';
+import { Icon, Popover, Breadcrumb } from 'antd';
 
 import * as listAction from 'main/actions/list';
 import * as modalAction from 'main/actions/modal';
@@ -39,8 +39,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-      this.props.fetchProjectInfo('project', {id: this.props.params.id});
-      this.props.fetchVersionList();
+      this.props.fetchSingleInfo('project', {id: this.props.params.id});
+      this.props.fetchList('version', {projectId: this.props.params.id});
     }
 
     renderPopContent(id, index) {
@@ -66,6 +66,10 @@ class Home extends Component {
             <p>{activeInfo.project.api}</p>
           </div>
           <div className="project-main">
+            <Breadcrumb>
+              <Breadcrumb.Item><Link to="/">首页</Link></Breadcrumb.Item>
+              <Breadcrumb.Item>{activeInfo.project.name}</Breadcrumb.Item>
+            </Breadcrumb>
             <ul className="clearfix block-list project-list">
               <li>
                 <a className="block-item-plus" onClick={(ev) => this.handleClickAdd(ev)}><Icon type="plus" /></a>

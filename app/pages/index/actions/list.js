@@ -2,13 +2,29 @@ import versions from './data/version';
 import request from 'app/vendor/request';
 import { message } from 'antd';
 
-export function fetchProjectList() {
+/**
+ *  获取各种列表
+ */
+export function fetchList(modelType, info) {
+  let url = '/end/project/';
+  let type = '';
+  switch (modelType) {
+    case 'project':
+      url += 'list';
+      type = 'GET_PROJECT_LIST';
+      break;
+    case 'version':
+      url += `${info.projectId}/version/list`;
+      type = 'GET_VERSION_LIST';
+      break;
+  }
+
   return dispatch => {
-    request.get('/end/project/list')
+    request.get(url)
       .promiseify()
       .then((res) => {
         dispatch({
-          type: 'GET_PROJECT_LIST',
+          type,
           data: JSON.parse(res.text).data
         });
       }, (err) => {
@@ -17,17 +33,11 @@ export function fetchProjectList() {
   }
 }
 
-export function fetchVersionList(projectId) {
-  return dispatch => {
-    dispatch({
-      type: 'GET_VERSION_LIST',
-      data: versions
-    });
-  }
-}
 
-export function fetchProjectInfo(modelType, info) {
-  // 此处也要异步
+/**
+ *  获取单个条目信息
+ */
+export function fetchSingleInfo(modelType, info) {
   return dispatch => {
     request.get(`/end/${modelType}/${info.id}`)
       .promiseify()
@@ -45,12 +55,15 @@ export function fetchProjectInfo(modelType, info) {
   }
 }
 
+
+/**
+ *  删除单个条目
+ */
 export function deleteItem(modelType, info) {
   return dispatch => {
     request.del(`/end/${modelType}/${info.id}`)
       .promiseify()
       .then((res) => {
-        console.log(res);
         if (res.body.errors) {
           message.warning(res.body.message);
           return;

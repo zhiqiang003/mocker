@@ -37,11 +37,13 @@ export function updateEditor(info) {
 
 export function confirmEditor(modelType, info) {
   let method = 'post';
+  let url = `/end${modelType}`;
   if (info.id) {
     method = 'put';
+    url = `${url}/${info.id}`
   };
   return dispatch => {
-      request[method](`/end/${modelType}`)
+      request[method](url)
       .query(info)
       .promiseify()
       .then((res) => {
@@ -55,15 +57,5 @@ export function confirmEditor(modelType, info) {
         console.log(err);
         closeEditor();
       });
-  }
-  return;
-  console.log('目前空方法');
-  dispatch => {
-    dispatch({
-      type: 'CONFIRM_EDITOR',
-      data:{
-        show: false
-      }
-    });
   }
 }

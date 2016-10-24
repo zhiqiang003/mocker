@@ -1,33 +1,36 @@
 import config from 'config';
 import uuid from 'node-uuid';
 import Controller from '../controller';
-import Project from '../db/models/project';
+import Version from '../db/models/version';
+import Project from '../db/models/Project';
 import sequelize from '../db/index';
 import queryString from 'query-string';
 
 export default class Main extends Controller {
-    *list(name) {
-      let list = yield Project.findAll({where: {
-        is_deleted: false
+    *list(projectId) {
+      let list = yield Version.findAll({where: {
+        project_id: projectId
       }});
       this.podata({
         data: list
       });
     }
 
-    *get(id) {
-      let project = yield Project.findOne({where: {
-        id
+    *get(projectId, versionId) {
+      let version = yield Version.findOne({where: {
+        id: versionId,
+        project_id: projectId
       }})
-      this.podata({data: project});
+      this.podata({data: version});
     }
 
-    *create() {
+    *create(projectId) {
       let query = queryString.parse(this.ctx.request.url.split('?')[1]);
       query.uid = uuid.v1();
+      query.project_id = projectId;
 
       try {
-        let action = yield Project.create(query);
+        let action = yield Version.create(query);
         this.podata({data: action});
       } catch(ex) {
         console.log(ex);
@@ -35,13 +38,14 @@ export default class Main extends Controller {
       }
     }
 
-    *update(id) {
+    *update(projectId, versionId) {
       let query = queryString.parse(this.ctx.request.url.split('?')[1]);
       delete query.id;
 
       try {
-        let action = yield Project.update(query, { where: {
-          id
+        let action = yield Version.update(query, { where: {
+          id: versionId,
+          project_id: projectId
         }});
         this.podata({data: action});
       } catch(ex) {
@@ -50,10 +54,11 @@ export default class Main extends Controller {
       }
     }
 
-    *delete(id) {
+    *delete(projectId, versionId) {
       try {
-        let action = yield Project.update({is_deleted: true}, { where: {
-          id
+        let action = yield Version.destroy({ where: {
+          id: versionId,
+          project_id: projectId
         }});
         this.podata({data: action});
       } catch(ex) {

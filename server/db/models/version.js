@@ -23,7 +23,7 @@ const Version = sequelize().define('version', {
     defaultValue: false
   },
   project_id: {
-    type: Sequelize.INTERGER
+    type: Sequelize.INTEGER
   },
   uid: {
     type: Sequelize.UUID

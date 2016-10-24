@@ -10,10 +10,10 @@ export default class Main extends Controller {
         })
     }
 
-    *test() {
-        this.render({
-            page: 'test'
-        })
+    *backend() {
+      this.podata({
+        data: '未找到相关资源，请验证请求是否正确'
+      });
     }
 
     *common() {

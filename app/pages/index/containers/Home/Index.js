@@ -50,7 +50,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-      this.props.fetchProjectList();
+      this.props.fetchList('project');
     }
 
     renderPopContent(id, index) {
