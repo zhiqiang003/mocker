@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import sequelize from '../index';
 import Project from './project';
+import * as util from '../util';
 
 const Version = sequelize().define('version', {
   id: {
@@ -10,9 +11,12 @@ const Version = sequelize().define('version', {
   },
   name: {
     type: Sequelize.STRING,
-    unique: true,
+    // unique: true,  // 添加此特性以后isUnique只能发挥作用而不能阻截
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      isUnique: function(value, next) {
+        return util.isUnique("version", ["name", "project_id"], this)(value, next);
+      }
     }
   },
   desc: {
@@ -34,6 +38,7 @@ const Version = sequelize().define('version', {
 }, {
   freezeTableName: true
 });
+
 
 Project.hasMany(Version, {
   foreignKey: 'project_id',

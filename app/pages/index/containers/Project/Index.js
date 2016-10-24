@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { Icon, Popover, Breadcrumb } from 'antd';
+import { Icon, Popover, Breadcrumb, Modal } from 'antd';
 
 import * as listAction from 'main/actions/list';
 import * as modalAction from 'main/actions/modal';
 import VersionEditor from 'app/components/common/VersionEditor';
 import './Index.scss';
+const confirm = Modal.confirm;
 
 class Home extends Component {
 
@@ -20,11 +21,23 @@ class Home extends Component {
     }
 
     handleClickDelete(id) {
-      this.props.openEditor({});
+      let self = this;
+      confirm({
+        title: '删除此项目？',
+        onOk() {
+          self.props.deleteItem('version', {
+            id: id,
+            projectId: self.props.params.id
+          });
+        },
+        onCancel() {}
+      });
     }
 
     handleConfirm() {
-      this.props.confirmEditor('version', 'xx', this.props.activeInfo);
+      this.props.confirmEditor('version', Object.assign({}, this.props.modal.editInfo, {
+        projectId: this.props.params.id
+      }));
     }
 
     handleCancel() {

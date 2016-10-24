@@ -1,5 +1,5 @@
 import request from 'app/vendor/request';
-import { fetchProjectList } from './list';
+import { fetchList } from './list';
 import { message } from 'antd';
 
 export function openEditor(info) {
@@ -37,11 +37,19 @@ export function updateEditor(info) {
 
 export function confirmEditor(modelType, info) {
   let method = 'post';
-  let url = `/end${modelType}`;
+  let url = `/end/project`;
+  switch (modelType) {
+    case 'project':
+      break;
+    case 'version':
+      url = `${url}/${info.projectId}/version`;
+      break;
+  }
   if (info.id) {
     method = 'put';
     url = `${url}/${info.id}`
   };
+
   return dispatch => {
       request[method](url)
       .query(info)
@@ -51,7 +59,7 @@ export function confirmEditor(modelType, info) {
           message.warning(res.body.message);
           return;
         }
-        fetchProjectList()(dispatch);
+        fetchList(modelType, info)(dispatch);
         closeEditor()(dispatch);
       }, (err) => {
         console.log(err);

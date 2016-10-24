@@ -27,7 +27,7 @@ export default class Main extends Controller {
     *create(projectId) {
       let query = queryString.parse(this.ctx.request.url.split('?')[1]);
       query.uid = uuid.v1();
-      query.project_id = projectId;
+      query.project_id = projectId - 0;
 
       try {
         let action = yield Version.create(query);
@@ -40,7 +40,6 @@ export default class Main extends Controller {
 
     *update(projectId, versionId) {
       let query = queryString.parse(this.ctx.request.url.split('?')[1]);
-      delete query.id;
 
       try {
         let action = yield Version.update(query, { where: {

@@ -60,15 +60,24 @@ export function fetchSingleInfo(modelType, info) {
  *  删除单个条目
  */
 export function deleteItem(modelType, info) {
+  let url = `/end/project`;
+  switch (modelType) {
+    case 'project':
+      url = `${url}/${info.id}`;
+      break;
+    case 'version':
+      url = `${url}/${info.projectId}/version/${info.id}`;
+      break;
+  }
   return dispatch => {
-    request.del(`/end/${modelType}/${info.id}`)
+    request.del(url)
       .promiseify()
       .then((res) => {
         if (res.body.errors) {
           message.warning(res.body.message);
           return;
         }
-        fetchProjectList()(dispatch);
+        fetchList(modelType, info)(dispatch);
       }, (err) => {
         console.log(err);
       });

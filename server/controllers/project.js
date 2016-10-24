@@ -37,7 +37,6 @@ export default class Main extends Controller {
 
     *update(id) {
       let query = queryString.parse(this.ctx.request.url.split('?')[1]);
-      delete query.id;
 
       try {
         let action = yield Project.update(query, { where: {
