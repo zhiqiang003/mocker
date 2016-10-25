@@ -1,4 +1,4 @@
-const data = (state = {project: {}, version: {}, api: {}, query: {} }, action) => {
+const data = (state = {project: {}, version: {}, api: {}, query: '', offset: '' }, action) => {
   switch(action.type) {
     case 'GET_ACTIVE':
       return Object.assign({}, state, {

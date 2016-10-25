@@ -1,19 +1,21 @@
 import request from 'app/vendor/request';
 import { message } from 'antd';
 
-const createUrl = (modelType, info, isList) => {
+export const createUrl = (modelType, info, isList) => {
   let url = '/end/project';
-  let lastParam = isList ? 'list' : info.id;
+  let lastParam = isList ? '/list' :
+      info.id ? `/${info.id}` :
+          '';
 
   switch (modelType) {
     case 'project':
-      url = `${url}/${lastParam}`;
+      url = `${url}${lastParam}`;
       break;
     case 'version':
-      url = `${url}/${info.projectId}/version/${lastParam}`;
+      url = `${url}/${info.projectId}/version${lastParam}`;
       break;
     case 'api':
-      url = `${url}/version/${info.versionId}/api/${lastParam}`;
+      url = `${url}/version/${info.versionId}/api${lastParam}`;
       break;
   }
 
@@ -29,11 +31,13 @@ export function fetchList(modelType, info) {
 
   return dispatch => {
     request.get(url)
+      .query(info)
       .promiseify()
       .then((res) => {
         dispatch({
           type,
-          data: JSON.parse(res.text).data
+          data: JSON.parse(res.text).data,
+          pagination: JSON.parse(res.text).pagination
         });
       }, (err) => {
         console.log(err);
