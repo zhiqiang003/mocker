@@ -52,15 +52,15 @@ class Home extends Component {
     }
 
     componentDidMount() {
-      this.props.fetchSingleInfo('project', {id: this.props.params.id});
-      this.props.fetchList('version', {projectId: this.props.params.id});
+      this.props.fetchSingleInfo('project', { id: this.props.params.id });
+      this.props.fetchList('version', { projectId: this.props.params.id });
     }
 
     renderPopContent(id, index) {
       return (
         <div className="edit-pop">
-          <Icon type="edit" onClick={(ev) => {this.handleClickEdit(id, index, ev)}}/>
-          <Icon type="delete" onClick={(ev) => {this.handleClickDelete(id, ev)}} />
+          <Icon type="edit" onClick={(ev) => { this.handleClickEdit(id, index, ev) }}/>
+          <Icon type="delete" onClick={(ev) => { this.handleClickDelete(id, ev) }} />
         </div>
       );
     }

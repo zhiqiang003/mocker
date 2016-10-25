@@ -1,12 +1,8 @@
-const defaultData = {
-  count: 0
-};
-
-const data = (state = defaultData, action) => {
+const data = (state = {list: []}, action) => {
   switch(action.type) {
-    case 'INIT':
+    case 'GET_API_LIST':
       return {
-        count: action.count
+        list: action.data
       };
       break;
     default:

@@ -2,7 +2,6 @@ import config from 'config';
 import uuid from 'node-uuid';
 import Controller from '../controller';
 import Version from '../db/models/version';
-import Project from '../db/models/Project';
 import sequelize from '../db/index';
 import queryString from 'query-string';
 

@@ -1,11 +1,31 @@
 .version-side {
   float: left;
   width: 160px;
-  margin-top: 20px;
+  padding: 0 4px;
+  margin-top: 6px;
+  height: 600px;
+  border-right: 1px solid #BDC3C7;
+  h2 {
+    line-height: 2em;
+  }
+  ul {
+    margin-top: 10px;
+  }
+  li {
+    line-height: 32px;
+    padding: 0 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: #ECF0F1;
+    }
+    &.active {
+      background-color: #95A5A6;
+    }
+  }
 }
 
 .version-main {
-  margin-left: 160px;
+  margin-left: 170px;
   .ant-breadcrumb {
     line-height: 4em;
     margin: 0 4%;

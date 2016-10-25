@@ -4,7 +4,6 @@ import Layout from 'app/core/Layout';
 import RedBase from 'app/core/Layout/RedBase';
 import reducers from './reducers';
 
-import Test from './containers/Test';
 import Home from './containers/Home';
 import Project from './containers/Project';
 import Version from './containers/Version';

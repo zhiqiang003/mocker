@@ -1,23 +1,31 @@
-import versions from './data/version';
 import request from 'app/vendor/request';
 import { message } from 'antd';
+
+const createUrl = (modelType, info, isList) => {
+  let url = '/end/project';
+  let lastParam = isList ? 'list' : info.id;
+
+  switch (modelType) {
+    case 'project':
+      url = `${url}/${lastParam}`;
+      break;
+    case 'version':
+      url = `${url}/${info.projectId}/version/${lastParam}`;
+      break;
+    case 'api':
+      url = `${url}/version/${info.versionId}/api/${lastParam}`;
+      break;
+  }
+
+  return url;
+}
 
 /**
  *  获取各种列表
  */
 export function fetchList(modelType, info) {
-  let url = '/end/project/';
-  let type = '';
-  switch (modelType) {
-    case 'project':
-      url += 'list';
-      type = 'GET_PROJECT_LIST';
-      break;
-    case 'version':
-      url += `${info.projectId}/version/list`;
-      type = 'GET_VERSION_LIST';
-      break;
-  }
+  let url = createUrl(modelType, info, true);
+  let type = `GET_${modelType.toUpperCase()}_LIST`;
 
   return dispatch => {
     request.get(url)
@@ -38,15 +46,7 @@ export function fetchList(modelType, info) {
  *  获取单个条目信息
  */
 export function fetchSingleInfo(modelType, info) {
-  let url = '/end/project/';
-  switch (modelType) {
-    case 'project':
-      url += info.id;
-      break;
-    case 'version':
-      url += `${info.projectId}/version/${info.id}`;
-      break;
-  }
+  let url = createUrl(modelType, info, false);
 
   return dispatch => {
     request.get(url)
@@ -70,15 +70,8 @@ export function fetchSingleInfo(modelType, info) {
  *  删除单个条目
  */
 export function deleteItem(modelType, info) {
-  let url = `/end/project`;
-  switch (modelType) {
-    case 'project':
-      url = `${url}/${info.id}`;
-      break;
-    case 'version':
-      url = `${url}/${info.projectId}/version/${info.id}`;
-      break;
-  }
+  let url = createUrl(modelType, info, false);
+
   return dispatch => {
     request.del(url)
       .promiseify()
