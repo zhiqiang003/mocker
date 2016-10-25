@@ -48,7 +48,7 @@ Project.hasMany(Version, {
 Version.belongsTo(Project, {
   foreignKey: 'project_id',
   constraints: false,
-  as: 'project'
+  as: 'version'
 });
 
 Version.sync();

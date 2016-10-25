@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import sequelize from '../index';
 import Version from './version';
+import * as util from '../util';
 
 const Api = sequelize().define('api', {
   id: {
@@ -10,9 +11,12 @@ const Api = sequelize().define('api', {
   },
   name: {
     type: Sequelize.STRING,
-    unique: true,
+    // unique: true,
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      isUnique: function(value, next) {
+        return util.isUnique("api", ["name", "version_id"], this)(value, next);
+      }
     }
   },
   desc: {
@@ -26,7 +30,7 @@ const Api = sequelize().define('api', {
     defaultValue: false
   },
   version_id: {
-    type: Sequelize.INTERGET
+    type: Sequelize.INTEGER
   },
   content: {
     type: Sequelize.TEXT('long')
@@ -41,7 +45,7 @@ const Api = sequelize().define('api', {
   freezeTableName: true
 });
 
-Version.hadMany(Api, {
+Version.hasMany(Api, {
   foreignKey: 'version_id',
   constraints: false
 });
