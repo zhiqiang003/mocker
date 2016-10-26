@@ -29,9 +29,7 @@ export default class Index extends Component {
 
 
   handleSave() {
-    this.props.onUpdate(Object.assign({}, this.state.formData, {
-      content: JSON.stringify(this.state.formData.content)
-    }));
+    this.props.onUpdate(this.state.formData);
   }
 
   handleReload() {
@@ -41,7 +39,7 @@ export default class Index extends Component {
   }
 
   handlePreview() {
-    console.log('preview');
+    this.props.onPreview(this.state.formData);
   }
 
   handleAceChange(newValue) {

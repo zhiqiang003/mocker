@@ -5,6 +5,9 @@ import Version from '../db/models/version';
 import sequelize from '../db/index';
 import queryString from 'query-string';
 
+
+// !!! 还需要 copy 功能呢
+
 export default class Main extends Controller {
     *list(projectId) {
       let list = yield Version.findAll({where: {
