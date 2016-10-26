@@ -15,6 +15,7 @@ get    "/end/project/:projectId(\d+)/version/list" => "version#list"
 get    "/end/project/:projectId(\d+)/version/:versionId(\d+)" => "version#get"
 post   "/end/project/:projectId(\d+)/version" => "version#create"
 put    "/end/project/:projectId(\d+)/version/:versionId(\d+)" => "version#update"
+post    "/end/project/:projectId(\d+)/version/:versionId(\d+)" => "version#copy"
 delete "/end/project/:projectId(\d+)/version/:versionId(\d+)" => "version#delete"
 
 get    "/end/project/version/:versionId(\d+)/api/list" => "api#list"
