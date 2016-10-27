@@ -48,7 +48,6 @@ export default class Index extends Component {
 
   onFormChange(key, value) {
     let { formData } = this.state;
-    console.log(formData);
     formData[key] = value;
     this.setState({
       formData
@@ -57,10 +56,12 @@ export default class Index extends Component {
 
   componentWillReceiveProps(newProps) {
     if (!newProps.formData.content) {
-      newProps.formData.content = '{}';
+      newProps.formData.content = "{}";
     }
+    // newProps.formData.content = newProps.formData.content.replace(/(\t|\r|\n|\s)/g, '');
+
     this.setState({
-      formData: newProps.formData
+      formData: newProps.formData,
     });
   }
 
